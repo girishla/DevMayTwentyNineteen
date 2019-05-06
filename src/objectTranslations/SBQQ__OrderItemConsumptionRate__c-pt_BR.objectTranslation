@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Taxa de consumo de item do pedido</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Taxas de consumo de item do pedido</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <nameFieldLabel>Nome da taxa de consumo do item do pedid</nameFieldLabel>
+</CustomObjectTranslation>
