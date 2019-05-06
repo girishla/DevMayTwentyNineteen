@@ -30,7 +30,7 @@ public class CPQ_ApiWrapperTest {
         CPQ_TestDataFactory.TestData testData=new CPQ_TestDataFactory.TestData();
 
         Product2 product = CPQ_Utils.getProduct('LRPERP1000');
-		CPQ_ApiDataModels.ProductModel productModel = CPQ_ApiWrapper.loadProduct(product.Id, Test.getStandardPricebookId(), 'USD');
+		CPQ_ApiDataModels.ProductModel productModel = CPQ_ApiWrapper.loadProduct(product.Id, Test.getStandardPricebookId(), 'GBP');
 	}
 
 

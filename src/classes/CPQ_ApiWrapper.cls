@@ -186,13 +186,21 @@ public without sharing class CPQ_ApiWrapper {
     }
 
     public static CPQ_ApiDataModels.QuoteModel calculateAndSaveQuote(CPQ_ApiDataModels.QuoteModel quoteModel) {
-        //String calculatedQuoteJSON = SBQQ.QuoteLineEditorController.calculateQuote2(quoteModel.record.Id, JSON.serialize(quoteModel));
+//        String calculatedQuoteJSON = SBQQ.QuoteLineEditorController.calculateQuote2(quoteModel.record.Id, JSON.serialize(quoteModel));
+
         // Attempt to get around uncomitted changes by saving first
-        String savedQuoteJSON = saveStr(QUOTE_SAVER, JSON.serialize(quoteModel));
+//        String savedQuoteJSON = saveStr(QUOTE_SAVER, quoteModel);
+//        System.debug(LoggingLevel.WARN, 'savedQuoteJSON: ' + savedQuoteJSON);
+
+//        String calculatedQuoteJSON = SBQQ.QuoteLineEditorController.calculateQuote2(quoteModel.record.Id, JSON.serialize(savedQuoteJSON));
+//        savedQuoteJSON = saveStr(QUOTE_SAVER, calculatedQuoteJSON);
+        CPQ_ApiDataModels.QuoteModel savedQuote = (CPQ_ApiDataModels.QuoteModel) quoteModel;
         //String calculatedQuoteJSON = SBQQ.QuoteLineEditorController.calculateQuote2(quoteModel.record.Id, JSON.serialize(savedQuoteJSON));
-        //savedQuoteJSON = saveStr(QUOTE_SAVER, calculatedQuoteJSON);
-        CPQ_ApiDataModels.QuoteModel savedQuote = (CPQ_ApiDataModels.QuoteModel) JSON.deserialize(savedQuoteJSON, CPQ_ApiDataModels.QuoteModel.class);
-        //String calculatedQuoteJSON = SBQQ.QuoteLineEditorController.calculateQuote2(quoteModel.record.Id, JSON.serialize(savedQuoteJSON));
+
+        String calculatedQuoteJSON = JSON.serialize(calculateQuote(savedQuote));
+        String savedQuoteJSON = saveStr(QUOTE_SAVER, calculatedQuoteJSON);
+
+
         if(debug) {
             //System.debug(LoggingLevel.WARN, 'calculatedQuoteJSON: ' + calculatedQuoteJSON);
             System.debug(LoggingLevel.WARN, 'savedQuoteJSON: ' + savedQuoteJSON);
@@ -239,6 +247,18 @@ public without sharing class CPQ_ApiWrapper {
         }
 
         return savedQuoteModel;
+    }
+
+
+    public static void addProductToQuote(Id quoteId,Id productId){
+
+
+        CPQ_ApiDataModels.QuoteModel quoteModel = CPQ_ApiWrapper.addProductsToQuote(quoteId, productId, SingletonFactory.getStandardPriceBookInstance().Id, 'GBP', true);
+
+//        CPQ_ApiWrapper.saveQuote(quoteModel);
+//        CPQ_ApiWrapper.calculateQuote(quoteModel);
+//        CPQ_ApiWrapper.calculateQuote(quoteId);
+        CPQ_ApiWrapper.calculateAndSaveQuote(quoteModel);
     }
 
 }

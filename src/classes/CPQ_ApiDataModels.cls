@@ -247,6 +247,7 @@ public without sharing class CPQ_ApiDataModels {
         public Decimal netNonSegmentTotal;
 
         public Boolean calculationRequired;
+
     }
 
     public without sharing class QuoteLineModel {
